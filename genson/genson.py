@@ -37,15 +37,17 @@ def parse_args():
                         'space') will get converted to a whitespace character,
                         and if empty string ('') is passed, the parser will
                         try to auto-detect where the boundary is.''')
+    parser.add_argument('-e', '--encoding', type=str, default='',
+                        help='''force use of specific encoding for input files''')
     parser.add_argument('-i', '--indent', type=int, metavar='SPACES',
                         help='''pretty-print the output, indenting SPACES
                         spaces''')
     parser.add_argument('-s', '--schema', action='append', default=[],
-                        type=argparse.FileType('r'),
+                        type=argparse.FileType('r', encoding='utf-8'),
                         help='''file containing a JSON Schema (can be
                         specified multiple times to merge schemas)''')
     parser.add_argument('object', nargs=argparse.REMAINDER,
-                        type=argparse.FileType('r'), help='''files containing
+                        type=argparse.FileType('r', encoding='utf-8'), help='''files containing
                         JSON objects (defaults to stdin if no arguments
                         are passed and the -s option is not present)''')
 
